@@ -1,5 +1,6 @@
 export default Ember.Object.extend({
   open() {
+    Ember.Logger.debug('torii-adapter', 'Opening session');
     return new Ember.RSVP.Promise((resolve, reject) => {
       Ember.$.ajax( {
         dataType: 'json',
@@ -14,6 +15,7 @@ export default Ember.Object.extend({
     })
   },
   fetch() {
+    Ember.Logger.debug('torii-adapter', 'Fetching session');
     return new Ember.RSVP.Promise((resolve, reject) => {
       Ember.$.ajax({
         dataType: 'json',
@@ -22,13 +24,12 @@ export default Ember.Object.extend({
         success: Ember.run.bind(null, resolve),
         error: Ember.run.bind(null, reject)
       }).then(function(user){
-        console.log('Current', user);
         return { currentUser: user };
       });
     });
   },
   close() {
-    Ember.Logger.debug('my-auth', 'Closing session');
+    Ember.Logger.debug('torii-adapter', 'Closing session');
     return new Ember.RSVP.Promise((resolve, reject) => Ember.$.ajax({
       dataType: 'json',
       method: 'POST',
