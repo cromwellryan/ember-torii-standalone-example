@@ -1,0 +1,18 @@
+<h2 id="title">Welcome to Ember</h2>
+
+{{#link-to 'a'}}A{{/link-to}}
+
+{{#link-to 'b'}}B{{/link-to}}
+
+{{#if session.isAuthenticated}}
+  <p>You're logged in, {{session.currentUser.First}}!</p>
+  {{#link-to 'protected.c'}}C{{/link-to}}
+  {{#link-to 'protected.d'}}D{{/link-to}}
+  <button {{action 'logout'}}>Logout</button>
+{{else}}
+  {{input value=username}}
+  {{input type="password" value=password}}
+  <button {{action 'login' username password}}>Login</button>
+{{/if}}
+
+{{outlet}}
